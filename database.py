@@ -3,9 +3,9 @@
 # Datum: 2025-02-07
 # Version: 0.1
 
-
 import sqlite3
 from sqlite3 import Error
+
 
 # Verbindung zur SQLite-Datenbank (oder Erstellen einer neuen, wenn sie nicht existiert)
 def create_connection():
@@ -16,7 +16,7 @@ def create_table():
     connection = create_connection()
     cursor = connection.cursor()
     cursor.execute('''
-    CREATE TABLE IF NOT EXISTS user (
+    CREATE TABLE IF NOT EXISTS werte (
         id INTEGER PRIMARY KEY,
         date DATE,
         phe_value FLOAT,
@@ -33,7 +33,7 @@ def insert_data(date, phe_value, tyr_value, comment):
     connection = create_connection()
     cursor = connection.cursor()
     cursor.execute('''
-    INSERT INTO user (date, phe_value, tyr_value, comment)
+    INSERT INTO werte (date, phe_value, tyr_value, comment)
     VALUES (?, ?, ?, ?)
     ''', (date, phe_value, tyr_value, comment))
     connection.commit()
@@ -42,7 +42,8 @@ def insert_data(date, phe_value, tyr_value, comment):
 def show_data():
     connection = create_connection()
     cursor = connection.cursor()
-    cursor.execute('SELECT * FROM user')
-    for row in cursor.fetchall():
-        print(row)
-    
+    cursor.execute('SELECT phe_value, tyr_value, date, comment FROM werte ORDER BY date DESC')
+    data = cursor.fetchall()
+    return data
+
+create_table()
