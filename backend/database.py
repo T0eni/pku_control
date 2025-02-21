@@ -1,17 +1,16 @@
 # Create and manage the sqlite database
 # Autor: Toni Dahlitz
-# Datum: 2025-02-07
+# Datum: 2025-02-21
 # Version: 0.1
 
 import sqlite3
 from sqlite3 import Error
 
-
-# Verbindung zur SQLite-Datenbank (oder Erstellen einer neuen, wenn sie nicht existiert)
+# Create a connection to the database and create database if not exists
 def create_connection():
-    return sqlite3.connect('pku_control.db')
+    return sqlite3.connect('database/pku_control.db')
         
-# Erstellen einer Tabelle (falls noch nicht vorhanden)
+# Create a table in the database
 def create_table():
     connection = create_connection()
     cursor = connection.cursor()
@@ -28,7 +27,7 @@ def create_table():
     connection.close()
     print('Table created')
 
-# Einfügen von Daten in die Tabelle
+# Insert Data into the database
 def insert_data(date, phe_value, tyr_value, comment):
     connection = create_connection()
     cursor = connection.cursor()
@@ -38,7 +37,7 @@ def insert_data(date, phe_value, tyr_value, comment):
     ''', (date, phe_value, tyr_value, comment))
     connection.commit()
     connection.close()
-
+# Show Data
 def show_data():
     connection = create_connection()
     cursor = connection.cursor()

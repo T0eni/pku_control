@@ -1,14 +1,13 @@
 # Manage and control the backend of the application.
 # Includes the data handling
 # Author: Toni Dahlitz
-# Date: 2025-02-07
+# Date: 2025-02-21
 # Version: 0.1
 
-import database
+import backend.database as database
 
 def main():
     database.create_table()
- #Das funktioniert  database.insert_data('2025-02-07', 0.5, 0.00, 'Comment')
     database.insert_data()
     database.show_data()
 
