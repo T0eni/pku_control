@@ -1,0 +1,9 @@
+name: pku_control_env
+dependencies:
+  - python=3.10
+  - numpy
+  - pandas
+  - matplotlib
+  - pip
+  - pip:
+    - some-pypi-package
